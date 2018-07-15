@@ -16,14 +16,26 @@ export class MyCurrencyPipe implements PipeTransform {
   }
 
   transform(value: number | string, fractionSize: number = 2): string {
-    let [ integer, fraction = "" ] = (value || "").toString()
-      .split(this.DECIMAL_SEPARATOR);
+    let integer = '' , fraction = '.00';
+    var re = new RegExp("^(?:(?:\\d+|\\d*\\.\\d+)(?:[B|b|M|m])?)$");
+    if ((value || "").toString().indexOf('B') > -1 || (value || "").toString().indexOf('b') > -1) {
+      integer = (value || "").toString().split('B')[0];
+      integer = (parseFloat(integer) * 1000000000) + ''      
+      integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, this.THOUSANDS_SEPARATOR);
+    } else {
+      integer = (value || "").toString().split(this.DECIMAL_SEPARATOR)[0];
 
+      fraction = (value || "").toString().split(this.DECIMAL_SEPARATOR)[1]
+        ? (value || "").toString().split(this.DECIMAL_SEPARATOR)[1]
+        : '';
+      alert(fraction);
     fraction = fractionSize > 0
       ? this.DECIMAL_SEPARATOR + (fraction + PADDING).substring(0, fractionSize)
       : "";
 
     integer = integer.replace(/\B(?=(\d{3})+(?!\d))/g, this.THOUSANDS_SEPARATOR);
+    }
+    
 
     return integer + fraction;
   }
