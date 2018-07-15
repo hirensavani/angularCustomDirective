@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Angular QuickStart Source
 [![Build Status][travis-badge]][travis-badge-url]
 
@@ -193,3 +194,7 @@ Shut it down manually with `Ctrl-C`.
 
 [travis-badge]: https://travis-ci.org/angular/quickstart.svg?branch=master
 [travis-badge-url]: https://travis-ci.org/angular/quickstart
+=======
+# angularCustomDirective
+Allow numeric 2 decimal point, number format with commas for input fields
+>>>>>>> 3e519dfa72de38894377941fc031cf9111ad9ceb
